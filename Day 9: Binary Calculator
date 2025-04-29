@@ -1,0 +1,118 @@
+#index.html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Binary Calculator</title>
+        <link rel="stylesheet" href="css/binaryCalculator.css" type="text/css">
+    </head>
+    <body>
+        <div id="res"></div>
+        <div id="btns">
+            <button id="btn0">0</button>
+            <button id="btn1">1</button>
+            <button id="btnClr">C</button>
+            <button id="btnEql">=</button>
+            <button id="btnSum">+</button>
+            <button id="btnSub">-</button>
+            <button id="btnMul">*</button>
+            <button id="btnDiv">/</button>
+        </div>
+
+        <script src="js/binaryCalculator.js" type="text/javascript"></script>
+    </body>
+</html>
+
+#binaryCalculator.css
+body {
+    width: 33%;
+}
+
+#res {
+    background-color: lightgray;
+    border: solid 1px black;
+    height: 48px;
+    font-size: 20px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+#btns button {
+    width: 25%;
+    height: 36px;
+    font-size: 18px;
+    margin: 0px;
+    float: left;
+}
+
+#btn0, #btn1 {
+    background-color: lightgreen;
+    color: brown;
+}
+
+#btnClr, #btnEql {
+    background-color: darkgreen;
+    color: white;
+}
+
+#btnSum, #btnSub, #btnMul, #btnDiv {
+    background-color: black;
+    color: red;
+}
+#binaryCalculator.js
+const res = document.getElementById('res');
+
+document.getElementById('btn0').onclick = function() {
+    res.innerHTML += '0';
+};
+
+document.getElementById('btn1').onclick = function() {
+    res.innerHTML += '1';
+};
+
+document.getElementById('btnClr').onclick = function() {
+    res.innerHTML = '';
+};
+
+document.getElementById('btnSum').onclick = function() {
+    res.innerHTML += '+';
+};
+
+document.getElementById('btnSub').onclick = function() {
+    res.innerHTML += '-';
+};
+
+document.getElementById('btnMul').onclick = function() {
+    res.innerHTML += '*';
+};
+
+document.getElementById('btnDiv').onclick = function() {
+    res.innerHTML += '/';
+};
+
+document.getElementById('btnEql').onclick = function() {
+    let expression = res.innerHTML;
+    let operands = expression.split(/[\+\-\*\/]/);
+    let operator = expression.match(/[\+\-\*\/]/)[0];
+
+    let num1 = parseInt(operands[0], 2);
+    let num2 = parseInt(operands[1], 2);
+    let result = 0;
+
+    switch(operator) {
+        case '+':
+            result = num1 + num2;
+            break;
+        case '-':
+            result = num1 - num2;
+            break;
+        case '*':
+            result = num1 * num2;
+            break;
+        case '/':
+            result = Math.floor(num1 / num2);
+            break;
+    }
+
+    res.innerHTML = result.toString(2);
+};
